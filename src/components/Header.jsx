@@ -10,7 +10,6 @@ const Header = () => (
       <img className="header__img" src={logo} alt="Platzi Video" />
     </Link>
 
-    <img className="header__img" src={logo} alt="Platzi Video" />
     <div className="header__menu">
       <div className="header__menu--profile">
         <img src={userIcon} alt="" />
@@ -21,7 +20,7 @@ const Header = () => (
           <a href="/">Cuenta</a>
         </li>
         <li>
-          <a href="/">Cerrar Sesión</a>
+          <Link to="/login">Iniciar Sesión</Link>
         </li>
       </ul>
     </div>

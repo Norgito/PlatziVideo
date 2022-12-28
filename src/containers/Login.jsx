@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 //Icons
-import googleIcon from '../assets/static/google-icon.png'
-import twitterIcon from '../assets/static/twitter-icon.png'
+import googleIcon from "../assets/static/google-icon.png";
+import twitterIcon from "../assets/static/twitter-icon.png";
 //Styles
-import '../assets/styles/containers/Login.scss'
+import "../assets/styles/containers/Login.scss";
 
 const login = () => {
   return (
@@ -30,6 +31,9 @@ const login = () => {
             <img src={twitterIcon} /> Inicia sesión con Twitter
           </div>
         </section>
+        <p className="login__container--register">
+          No tienes ninguna cuenta <Link to="/register">Regístrate</Link>
+        </p>
       </section>
     </section>
   );
