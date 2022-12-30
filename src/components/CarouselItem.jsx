@@ -10,76 +10,44 @@ import removeIcon from "../assets/static/remove-icon.png";
 import PropTypes from "prop-types";
 
 //Redux
-import { connect } from "react-redux";
+import { useDispatch } from 'react-redux';
 import { setFavorite, deleteFavorite } from "../actions";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 const CarouselItem = (props) => {
-  const { id, cover, title, year, duration, contentRating, isList } = props;
+  const { id, cover, title, year, contentRating, duration } = props;
+  const dispatch = useDispatch();
+
   const handleSetFavorite = () => {
-    props.setFavorite({
-      id,
-      cover,
-      title,
-      year,
-      duration,
-      contentRating,
-    });
-  };
-  const handleDeleteFavorite = (itemId) => {
-    props.deleteFavorite(itemId);
-  };
+    const payload = { id, cover, title, year, contentRating, duration }
+    dispatch(setFavorite(payload))
+  }
   return (
     <div className="carousel-item">
       <img className="carousel-item__img" src={cover} alt={title} />
       <div className="carousel-item__details">
         <div>
-          <Link to={`/player/${id}`}>
-            <img
-              className="carousel-item__details--img"
-              src={playIcon}
-              alt="Play Icon"
-            />
-          </Link>
-
-          {isList ? (
-            <img
-              className="carousel-item__details--img"
-              src={removeIcon}
-              alt="Remove Icon"
-              onClick={() => handleDeleteFavorite(id)}
-            />
-          ) : (
-            <img
-              className="carousel-item__details--img"
-              src={plusIcon}
-              alt="Plus Icon"
-              onClick={handleSetFavorite}
-            />
-          )}
+          <img className="carousel-item__details--img" src={playIcon} alt="Play Icon" />
+          <img 
+            className="carousel-item__details--img" 
+            src={plusIcon}
+            alt="Plus Icon"
+            onClick={handleSetFavorite}
+          />
         </div>
         <p className="carousel-item__details--title">{title}</p>
-        <p className="carousel-item__details--subtitle">
-          {`${year} ${contentRating} ${duration}`}
-        </p>
+        <p className="carousel-item__details--subtitle">{`${year} ${contentRating} ${duration}`}</p>
       </div>
     </div>
-  );
+  )
 };
 
 CarouselItem.propTypes = {
-  cover: PropTypes.string,
   title: PropTypes.string,
   year: PropTypes.number,
   contentRating: PropTypes.string,
   duration: PropTypes.number,
+  cover: PropTypes.string,
 };
 
-// Redux
-const mapDispatchToProps = {
-  setFavorite,
-  deleteFavorite,
-};
-
-// export default CarouselItem;
-export default connect(null, mapDispatchToProps)(CarouselItem);
+export default CarouselItem;
